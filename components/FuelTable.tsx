@@ -48,15 +48,20 @@ const FuelTable: React.FC<FuelTableProps> = ({ entries, onDelete, onEdit, onShar
       <tbody className="divide-y divide-slate-800">
         {entries.map((entry) => {
           const consumo = calculateConsumption(entry);
+          
+          // Tratamento correto da data para evitar fuso horário UTC
+          const [year, month, day] = entry.data.split('-').map(Number);
+          const dateObj = new Date(year, month - 1, day);
+
           return (
             <tr key={entry.id} className="hover:bg-slate-800/40 transition-all group">
               <td className={tdClasses}>
                 <div className="flex flex-col">
                   <span className="font-bold text-slate-200">
-                    {new Date(entry.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}
+                    {dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}
                   </span>
                   <span className="text-[9px] text-slate-600 font-bold uppercase">
-                    {new Date(entry.data).toLocaleDateString('pt-BR', { year: 'numeric' })}
+                    {dateObj.toLocaleDateString('pt-BR', { year: 'numeric' })}
                   </span>
                 </div>
               </td>

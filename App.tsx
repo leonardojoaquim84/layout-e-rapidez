@@ -63,7 +63,12 @@ const App: React.FC = () => {
 
   const handleShare = async (entry: FuelEntry) => {
     const doc = new jsPDF();
-    const dateStr = new Date(entry.data).toLocaleDateString('pt-BR');
+    
+    // Tratamento correto da data para evitar fuso horário UTC
+    const [year, month, day] = entry.data.split('-').map(Number);
+    const dateObj = new Date(year, month - 1, day);
+    const dateStr = dateObj.toLocaleDateString('pt-BR');
+    
     const consumo = entry.litros > 0 ? (entry.odometroParcial / entry.litros).toFixed(2) : "0.00";
     
     doc.setFontSize(22);
