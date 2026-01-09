@@ -15,7 +15,7 @@ const InputWrapper = ({ label, icon: Icon, children, className = "" }: { label: 
       {label}
     </label>
     <div className="relative w-full flex items-center group">
-      <div className="absolute left-4 z-10 text-slate-600 group-focus-within:text-emerald-500 transition-colors pointer-events-none">
+      <div className="absolute left-4 z-10 text-slate-600 group-focus-within:text-orange-500 transition-colors pointer-events-none">
         <Icon size={18} strokeWidth={2} />
       </div>
       {children}
@@ -24,8 +24,17 @@ const InputWrapper = ({ label, icon: Icon, children, className = "" }: { label: 
 );
 
 const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) => {
+  // Função para obter a data local no formato YYYY-MM-DD corretamente
+  const getTodayString = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   const getEmptyState = (): FuelEntryFormData => ({
-    data: new Date().toISOString().split('T')[0],
+    data: getTodayString(),
     carro: '',
     combustivel: 'Gasolina',
     litros: 0,
@@ -53,10 +62,11 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
     onSubmit(formData, shouldCloseOnSubmit);
     
     if (!shouldCloseOnSubmit) {
+      // Ao resetar para um novo registro, recalculamos a data de "hoje"
       setFormData(prev => ({
         ...getEmptyState(),
         carro: prev.carro,
-        data: prev.data
+        data: getTodayString()
       }));
     }
   };
@@ -69,7 +79,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
     }));
   };
 
-  const inputClasses = "w-full pl-12 pr-4 min-h-[46px] bg-slate-950 border border-slate-800 rounded-2xl focus:bg-slate-900 focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 outline-none transition-all text-slate-100 font-medium placeholder:text-slate-700 flex items-center";
+  const inputClasses = "w-full pl-12 pr-4 min-h-[46px] bg-slate-950 border border-slate-800 rounded-2xl focus:bg-slate-900 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all text-slate-100 font-medium placeholder:text-slate-700 flex items-center";
 
   return (
     <form className="p-0 flex flex-col" onSubmit={handleSubmit}>
@@ -83,6 +93,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
               onChange={handleChange}
               className={inputClasses}
               required
+              title="Data do abastecimento (padrão: hoje)"
             />
           </InputWrapper>
 
@@ -188,8 +199,8 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             <button 
               type="submit" 
               onClick={() => setShouldCloseOnSubmit(false)}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 font-bold rounded-2xl transition-all active:scale-[0.98]"
-              title="Salvar e continuar adicionando"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-orange-500/10 text-orange-500 hover:bg-orange-500/20 font-bold rounded-2xl transition-all active:scale-[0.98]"
+              title="Salvar e continuar adicionando hoje"
             >
               <Plus size={18} strokeWidth={3} />
               <span className="hidden sm:inline">Salvar e Novo</span>
@@ -200,7 +211,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
           <button 
             type="submit"
             onClick={() => setShouldCloseOnSubmit(true)}
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl shadow-xl shadow-emerald-500/10 transition-all active:scale-[0.98]"
+            className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl shadow-xl shadow-orange-500/10 transition-all active:scale-[0.98]"
           >
             <span>{initialData ? 'Salvar Registro' : 'Adicionar registro'}</span>
             <ArrowRight size={18} strokeWidth={3} />

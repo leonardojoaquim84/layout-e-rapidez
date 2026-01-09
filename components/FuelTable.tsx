@@ -69,7 +69,7 @@ const FuelTable: React.FC<FuelTableProps> = ({ entries, onDelete, onEdit, onShar
               <td className={tdClasses}>
                 <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider
                   ${entry.combustivel === 'Gasolina' ? 'bg-amber-500/10 text-amber-500' : 
-                    entry.combustivel === 'Etanol' ? 'bg-emerald-500/10 text-emerald-500' : 
+                    entry.combustivel === 'Etanol' ? 'bg-orange-500/10 text-orange-500' : 
                     'bg-slate-700/50 text-slate-300'}`}>
                   {entry.combustivel}
                 </span>
@@ -79,7 +79,7 @@ const FuelTable: React.FC<FuelTableProps> = ({ entries, onDelete, onEdit, onShar
               </td>
               <td className={tdClasses}>
                 <div className="flex items-center gap-1">
-                  <span className={`font-black text-base ${consumo > 12 ? 'text-emerald-500' : consumo > 8 ? 'text-amber-500' : 'text-slate-300'}`}>
+                  <span className={`font-black text-base ${consumo > 12 ? 'text-orange-500' : consumo > 8 ? 'text-amber-500' : 'text-slate-300'}`}>
                     {consumo.toFixed(2)}
                   </span>
                   <span className="text-[9px] font-bold text-slate-600 uppercase">km/L</span>
@@ -92,7 +92,7 @@ const FuelTable: React.FC<FuelTableProps> = ({ entries, onDelete, onEdit, onShar
                 <div className="flex items-center justify-end gap-2 transition-all">
                   <button 
                     onClick={() => onShare(entry)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-[10px] font-black transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-[10px] font-black transition-all active:scale-95 shadow-lg shadow-orange-500/10"
                     title="Compartilhar"
                   >
                     <Share2 size={13} strokeWidth={3} />
@@ -102,7 +102,7 @@ const FuelTable: React.FC<FuelTableProps> = ({ entries, onDelete, onEdit, onShar
                   <div className="flex items-center bg-slate-950 rounded-lg p-0.5 border border-slate-800">
                     <button 
                       onClick={(e) => { e.stopPropagation(); onEdit(entry); }}
-                      className="p-1.5 text-slate-600 hover:text-emerald-400 hover:bg-emerald-500/10 rounded-md transition-all active:scale-90"
+                      className="p-1.5 text-slate-600 hover:text-orange-400 hover:bg-orange-500/10 rounded-md transition-all active:scale-90"
                       title="Editar"
                     >
                       <Edit2 size={14} />
