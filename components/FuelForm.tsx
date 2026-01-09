@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { FuelEntry, FuelEntryFormData } from '../types';
-import { Calendar, Car, Fuel, Hash, DollarSign, Gauge, ArrowRight, Check, Plus } from 'lucide-react';
+import { ArrowRight, Plus } from 'lucide-react';
 
 interface FuelFormProps {
   initialData?: FuelEntry;
@@ -9,15 +9,12 @@ interface FuelFormProps {
   onCancel: () => void;
 }
 
-const InputWrapper = ({ label, icon: Icon, children, className = "" }: { label: string, icon: any, children?: React.ReactNode, className?: string }) => (
+const InputWrapper = ({ label, children, className = "" }: { label: string, children?: React.ReactNode, className?: string }) => (
   <div className={`space-y-1 w-full flex flex-col ${className}`}>
     <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">
       {label}
     </label>
     <div className="relative w-full flex items-center group">
-      <div className="absolute left-4 z-10 text-slate-600 group-focus-within:text-orange-500 transition-colors pointer-events-none">
-        <Icon size={18} strokeWidth={2} />
-      </div>
       {children}
     </div>
   </div>
@@ -79,13 +76,14 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
     }));
   };
 
-  const inputClasses = "w-full pl-12 pr-4 min-h-[46px] bg-slate-950 border border-slate-800 rounded-2xl focus:bg-slate-900 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all text-slate-100 font-medium placeholder:text-slate-700 flex items-center";
+  // Ajustado: removido pl-12 (padding-left para o ícone) para px-4 (padding horizontal equilibrado)
+  const inputClasses = "w-full px-4 min-h-[46px] bg-slate-950 border border-slate-800 rounded-2xl focus:bg-slate-900 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all text-slate-100 font-medium placeholder:text-slate-700 flex items-center";
 
   return (
     <form className="p-0 flex flex-col" onSubmit={handleSubmit}>
       <div className="p-6 space-y-4 overflow-y-auto max-h-[70vh] scrollbar-hide bg-slate-900">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <InputWrapper label="Data de Abastecimento" icon={Calendar} className="sm:col-span-3">
+        <div className="grid grid-cols-2 gap-4">
+          <InputWrapper label="Data de Abastecimento" className="col-span-2">
             <input 
               type="date" 
               name="data" 
@@ -97,7 +95,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             />
           </InputWrapper>
 
-          <InputWrapper label="Veículo" icon={Car}>
+          <InputWrapper label="Veículo" className="col-span-1">
             <select 
               name="carro" 
               value={formData.carro} 
@@ -112,7 +110,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             </select>
           </InputWrapper>
 
-          <InputWrapper label="Combustível" icon={Fuel}>
+          <InputWrapper label="Combustível" className="col-span-1">
             <select 
               name="combustivel" 
               value={formData.combustivel} 
@@ -127,7 +125,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             </select>
           </InputWrapper>
 
-          <InputWrapper label="Litros" icon={Hash}>
+          <InputWrapper label="Litros" className="col-span-1">
             <input 
               type="number" 
               name="litros" 
@@ -141,7 +139,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             />
           </InputWrapper>
 
-          <InputWrapper label="Valor Total (R$)" icon={DollarSign}>
+          <InputWrapper label="Valor Total (R$)" className="col-span-1">
             <input 
               type="number" 
               name="valor" 
@@ -155,7 +153,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             />
           </InputWrapper>
 
-          <InputWrapper label="KM Parcial" icon={Gauge}>
+          <InputWrapper label="KM Parcial" className="col-span-1">
             <input 
               type="number" 
               name="odometroParcial" 
@@ -169,7 +167,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             />
           </InputWrapper>
 
-          <InputWrapper label="KM Total" icon={Gauge}>
+          <InputWrapper label="KM Total" className="col-span-1">
             <input 
               type="number" 
               name="odometroTotal" 
