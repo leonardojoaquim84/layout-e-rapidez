@@ -76,7 +76,6 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
     }));
   };
 
-  // Ajustado: removido pl-12 (padding-left para o ícone) para px-4 (padding horizontal equilibrado)
   const inputClasses = "w-full px-4 min-h-[46px] bg-slate-950 border border-slate-800 rounded-2xl focus:bg-slate-900 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all text-slate-100 font-medium placeholder:text-slate-700 flex items-center";
 
   return (
@@ -125,34 +124,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             </select>
           </InputWrapper>
 
-          <InputWrapper label="Litros" className="col-span-1">
-            <input 
-              type="number" 
-              name="litros" 
-              step="0.01" 
-              placeholder="0.00" 
-              value={formData.litros || ''} 
-              onChange={handleChange}
-              className={inputClasses}
-              required
-              min="0.01"
-            />
-          </InputWrapper>
-
-          <InputWrapper label="Valor Total (R$)" className="col-span-1">
-            <input 
-              type="number" 
-              name="valor" 
-              step="0.01" 
-              placeholder="0.00" 
-              value={formData.valor || ''} 
-              onChange={handleChange}
-              className={inputClasses}
-              required
-              min="0.01"
-            />
-          </InputWrapper>
-
+          {/* Ordem invertida: Odometros primeiro */}
           <InputWrapper label="KM Parcial" className="col-span-1">
             <input 
               type="number" 
@@ -178,6 +150,35 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
               className={inputClasses}
               required
               min="0"
+            />
+          </InputWrapper>
+
+          {/* Litros e Valor depois */}
+          <InputWrapper label="Litros" className="col-span-1">
+            <input 
+              type="number" 
+              name="litros" 
+              step="0.01" 
+              placeholder="0.00" 
+              value={formData.litros || ''} 
+              onChange={handleChange}
+              className={inputClasses}
+              required
+              min="0.01"
+            />
+          </InputWrapper>
+
+          <InputWrapper label="Valor Total (R$)" className="col-span-1">
+            <input 
+              type="number" 
+              name="valor" 
+              step="0.01" 
+              placeholder="0.00" 
+              value={formData.valor || ''} 
+              onChange={handleChange}
+              className={inputClasses}
+              required
+              min="0.01"
             />
           </InputWrapper>
         </div>
