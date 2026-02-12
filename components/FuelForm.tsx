@@ -119,8 +119,6 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
             >
               <option value="Gasolina" className="bg-slate-900">Gasolina</option>
               <option value="Etanol" className="bg-slate-900">Etanol</option>
-              <option value="Diesel" className="bg-slate-900">Diesel</option>
-              <option value="GNV" className="bg-slate-900">GNV</option>
             </select>
           </InputWrapper>
 
@@ -210,7 +208,7 @@ const FuelForm: React.FC<FuelFormProps> = ({ initialData, onSubmit, onCancel }) 
           <button 
             type="submit"
             onClick={() => setShouldCloseOnSubmit(true)}
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl shadow-xl shadow-orange-500/10 transition-all active:scale-[0.98]"
+            className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl shadow-xl shadow-orange-500/10 transition-all active:scale-95"
           >
             <span>{initialData ? 'Salvar Registro' : 'Adicionar registro'}</span>
             <ArrowRight size={18} strokeWidth={3} />
