@@ -27,13 +27,10 @@ export default function SignUpPage() {
     }
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo:
-          process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
-          `${window.location.origin}/dashboard`,
         data: {
           name,
         },
@@ -46,7 +43,11 @@ export default function SignUpPage() {
       return
     }
 
-    router.push('/auth/sign-up-success')
+    if (data.session) {
+      router.push('/dashboard')
+    } else {
+      router.push('/auth/sign-up-success')
+    }
   }
 
   return (
